@@ -50,7 +50,7 @@ namespace color_utils {
     // <.palette> files are sitting. Upon setting this, this
     // funtion attempts to load all the palettes in the root folder.
     // It throws an exception in case the path is not valid.
-    static void SetRoot(const fs::path    &root_dir);
+    static void SetRoot(const fs::path &root_dir);
     // This behaves the same as <SetRoot> except that instead of a root directory
     // name of a ROS package. Note that the given package should be in the same 
     // workspace as this package.
@@ -65,6 +65,8 @@ namespace color_utils {
     // does not modify <_active_palette> and just returns the palette with
     // name <palette_name>.
     static const ColorPalette& GetPalette(const std::string &palette_name);
+    // This returns the names of the available palettes.
+    static std::vector<std::string> GetPaletteNames();
     // This works only when the active palette is already set using either 
     // <set_palette(...)> or <operator[](const std::string&)> functions. Otherwise
     // it won't pass the assert macro. If active palette is alrady set, this has the same 

@@ -81,6 +81,16 @@ namespace color_utils{
 		return _palettes.at(pname);
 	}
 
+	std::vector<std::string> ColorLibrary::GetPaletteNames(){
+		std::vector<std::string> palette_names;
+
+		for(const auto it : _palettes){
+			palette_names.push_back(it.first);
+		}
+
+		return palette_names;
+	}
+
 	const Color ColorLibrary::PickColor(float id){
 
 		BOOST_ASSERT_MSG( _active_palette != NULL, "<_active_palette> is not set yet.");
