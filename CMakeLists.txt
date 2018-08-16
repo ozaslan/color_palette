@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5.1)
-project(color_palette)
+project(color_utils)
 
 ## Add support for C++11, supported in ROS Kinetic and newer
 add_definitions(-std=c++11)

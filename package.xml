@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package>
-  <name>color_palette</name>
+  <name>color_utils</name>
   <version>0.1.0</version>
   <description>The color_palette package</description>
 
