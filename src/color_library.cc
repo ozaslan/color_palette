@@ -1,4 +1,4 @@
-#include "color_picker.hh"
+#include "color_library.hh"
 
 #include "boost_assert_helper.hpp" // This has to come first due to a define macro
 #include <boost/assert.hpp>
@@ -9,11 +9,11 @@
 
 namespace color_utils{
 
-	std::map<std::string, ColorPalette> ColorPicker::_palettes;
-	fs::path ColorPicker::_root_dir = "";
-	ColorPalette * ColorPicker::_active_palette = NULL;
+	std::map<std::string, ColorPalette> ColorLibrary::_palettes;
+	fs::path ColorLibrary::_root_dir = "";
+	ColorPalette * ColorLibrary::_active_palette = NULL;
 
-	void ColorPicker::_loadColorPalettes(){
+	void ColorLibrary::_loadColorPalettes(){
 
 		_palettes.clear();
 
@@ -24,13 +24,13 @@ namespace color_utils{
 
 		if( !fs::exists(root) ){
 			std::stringstream ss;
-			ss << "In ColorPicker::" << __FUNCTION__ << ", ";
+			ss << "In ColorLibrary::" << __FUNCTION__ << ", ";
 			ss << "root directory <" << root.string() << "> does not exist ";
 			ss << "at file : " << __FILE__ << " line " << __LINE__;
 			throw ss.str();
 		} else if( !fs::is_directory(root) ) {
 			std::stringstream ss;
-			ss << "In ColorPicker::" << __FUNCTION__ << ", ";
+			ss << "In ColorLibrary::" << __FUNCTION__ << ", ";
 			ss << "path <" << root.string() << "> is not a directory ";
 			ss << "at file : " << __FILE__ << " line " << __LINE__;
 			throw ss.str();
@@ -54,19 +54,19 @@ namespace color_utils{
 		}
 	}
 
-	void ColorPicker::SetRoot(const std::string &root_dir){
+	void ColorLibrary::SetRoot(const std::string &root_dir){
 
 		_root_dir = root_dir;
 		_loadColorPalettes();
 	}
 
-	void ColorPicker::SetRootFromPackageName(const std::string &pkg_name){
+	void ColorLibrary::SetRootFromPackageName(const std::string &pkg_name){
 		_root_dir = ros::package::getPath(pkg_name);
 		_root_dir /= "palettes";
 		_loadColorPalettes();
 	}
 
-	const ColorPalette& ColorPicker::SetPalette(const std::string &palette_name){
+	const ColorPalette& ColorLibrary::SetPalette(const std::string &palette_name){
 
 		std::string pname = palette_name;
 		std::transform(pname.begin(), pname.end(), pname.begin(), ::tolower);
@@ -74,24 +74,24 @@ namespace color_utils{
 		return *_active_palette;
 	}
 
-	const ColorPalette& ColorPicker::GetPalette(const std::string &palette_name){
+	const ColorPalette& ColorLibrary::GetPalette(const std::string &palette_name){
 
 		std::string pname = palette_name;
 		std::transform(pname.begin(), pname.end(), pname.begin(), ::tolower);
 		return _palettes.at(pname);
 	}
 
-	const Color ColorPicker::Pick(float id){
+	const Color ColorLibrary::PickColor(float id){
 
 		BOOST_ASSERT_MSG( _active_palette != NULL, "<_active_palette> is not set yet.");
 		return _active_palette->operator[](id);
 	}
 
-	const Color ColorPicker::Pick(const std::string &pname, float id){
+	const Color ColorLibrary::PickColor(const std::string &pname, float id){
 		return GetPalette(pname).operator[](id);
 	}
 
-	void ColorPicker::Print(){
+	void ColorLibrary::Print(){
 		std::cout << std::endl;
 		std::cout << "= Available palettes are : ============" << std::endl;
 		for( auto it : _palettes ){
@@ -103,7 +103,7 @@ namespace color_utils{
 		std::cout << std::endl;
 	}
 
-	std::ostream& operator<<(std::ostream &stream, const ColorPicker &picker){
+	std::ostream& operator<<(std::ostream &stream, const ColorLibrary &picker){
 		stream << std::endl;
 		stream << "= Available palettes are : ============" << std::endl;
 		for( auto it : picker._palettes ){

@@ -1,5 +1,5 @@
-#ifndef __COLOR_PICKER_HH__
-#define __COLOR_PICKER_HH__
+#ifndef __COLOR_LIBRARY_HH__
+#define __COLOR_LIBRARY_HH__
 
 #include "color_palette.hh"
 
@@ -33,7 +33,7 @@ namespace fs = ::boost::filesystem;
 */
 
 namespace color_utils {
-  class ColorPicker{
+  class ColorLibrary{
   private:
     // Palette name - palette pairs.
     static std::map<std::string, ColorPalette> _palettes;
@@ -69,14 +69,14 @@ namespace color_utils {
     // <set_palette(...)> or <operator[](const std::string&)> functions. Otherwise
     // it won't pass the assert macro. If active palette is alrady set, this has the same 
     // effect as querying a color from that color palette.
-    static const Color Pick(float id);
+    static const Color PickColor(float id);
     // This has the same effect as <Pick(float id)> except for that this allows
     // for choosing the palette. This does not modify <_active_palette>. 
-    static const Color Pick(const std::string &pname, float id);
+    static const Color PickColor(const std::string &pname, float id);
     // This function prints the names and the number of colors of
     // available color palettes.
     static void Print();
-    friend std::ostream& operator<<(std::ostream &stream, const ColorPicker &picker) ;
+    friend std::ostream& operator<<(std::ostream &stream, const ColorLibrary &picker) ;
   }; // class
 
 }; // namespace

@@ -49,7 +49,7 @@ include_directories(
 add_library(color_palette src/color_palette.cc)
 add_dependencies(color_palette ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
-add_library(color_picker src/color_picker.cc)
-add_dependencies(color_picker color_picker ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_library(color_library src/color_library.cc)
+add_dependencies(color_library color_palette ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 # target_link_libraries(color_palette ${catkin_LIBRARIES})
