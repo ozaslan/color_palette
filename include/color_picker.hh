@@ -51,6 +51,10 @@ namespace color_utils {
     // funtion attempts to load all the palettes in the root folder.
     // It throws an exception in case the path is not valid.
     static void SetRoot(const std::string &root_dir);
+    // This behaves the same as <SetRoot> except that instead of a root directory
+    // name of a ROS package. Note that the given package should be in the same 
+    // workspace as this package.
+    static void SetRootFromPackageName(const std::string &pkg_name);
     // This sets the <_active_palette> to enable direct color querying
     // without any need to deliberately specifying the palette name
     // during consecutive uses of the same palette. This throws an exception

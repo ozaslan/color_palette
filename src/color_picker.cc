@@ -3,6 +3,8 @@
 #include "boost_assert_helper.hpp" // This has to come first due to a define macro
 #include <boost/assert.hpp>
 
+#include <ros/package.h> // This is in <roslib>
+
 #include <iomanip>
 
 namespace color_utils{
@@ -55,6 +57,12 @@ namespace color_utils{
 	void ColorPicker::SetRoot(const std::string &root_dir){
 
 		_root_dir = root_dir;
+		_loadColorPalettes();
+	}
+
+	void ColorPicker::SetRootFromPackageName(const std::string &pkg_name){
+		_root_dir = ros::package::getPath(pkg_name);
+		_root_dir /= "palettes";
 		_loadColorPalettes();
 	}
 

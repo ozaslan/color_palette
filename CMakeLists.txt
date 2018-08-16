@@ -28,7 +28,7 @@ find_package(Boost REQUIRED)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES
-  CATKIN_DEPENDS roscpp roslib
+  CATKIN_DEPENDS roslib
   DEPENDS EIGEN3 Boost
 )
 
