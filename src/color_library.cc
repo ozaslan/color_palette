@@ -54,7 +54,7 @@ namespace color_utils{
 		}
 	}
 
-	void ColorLibrary::SetRoot(const std::string &root_dir){
+	void ColorLibrary::SetRoot(const fs::path &root_dir){
 
 		_root_dir = root_dir;
 		_loadColorPalettes();
