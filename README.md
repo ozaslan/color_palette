@@ -24,4 +24,12 @@ rosrun color_utils test_color_library
 
 This shoud dump a lot of text on the command prompt consisting of available palette names, their paths and number of colors defined (note that you can interpolate between colors).
 
-![Alt text](images/palettes.png?raw=true "Available Color Palettes")
+This image show the available colors:
+
+<p align="center">
+  <img src="https://github.com/ozaslan/color_utils/blob/master/images/palettes.png">
+</p>
+
+## Acknowledgments
+
+This library copies both the names and the colors for color map in Matlab.
