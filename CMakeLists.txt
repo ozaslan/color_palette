@@ -8,13 +8,16 @@ add_definitions(-std=c++11)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
-  roscpp
-  roslib
+  roslib cv_bridge
 )
 
 ## System dependencies are found with CMake's conventions
 find_package(Eigen3 REQUIRED)
 find_package(Boost REQUIRED)
+find_package(OpenCV 3 REQUIRED)
+                  
+MESSAGE( STATUS "OpenCV Library Found : " ${OpenCV_FOUND} )                                                                                                             
+MESSAGE( STATUS "OpenCV Libraries     : " ${OpenCV_LIBRARIES} )
 
 ###################################
 ## catkin specific configuration ##
@@ -28,8 +31,8 @@ find_package(Boost REQUIRED)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES
-  CATKIN_DEPENDS roslib
-  DEPENDS EIGEN3 Boost
+  CATKIN_DEPENDS roslib cv_bridge
+  DEPENDS EIGEN3 Boost OpenCV 
 )
 
 ###########
@@ -42,14 +45,21 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIRS}
+  ${OpenCV_INCLUDE_DIRS}
   include
 )
 
 ## Declare a C++ library
 add_library(color_palette src/color_palette.cc)
-add_dependencies(color_palette ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(color_palette ${catkin_LIBRARIES})
 
 add_library(color_library src/color_library.cc)
-add_dependencies(color_library color_palette ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+target_link_libraries(color_library color_palette ${catkin_LIBRARIES})
 
 # target_link_libraries(color_palette ${catkin_LIBRARIES})
+
+add_executable(test_color_library test/test_color_library.cc)
+target_link_libraries(test_color_library color_library ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
+
+
+
