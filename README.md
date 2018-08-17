@@ -32,4 +32,6 @@ This image show the available colors:
 
 ## Acknowledgments
 
-This library copies both the names and the colors for color map in Matlab.
+This library copies both the names and the colors of [Matlab 'colormap'][1]
+
+[1]: https://www.mathworks.com/help/matlab/ref/colormap.html

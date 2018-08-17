@@ -40,7 +40,7 @@ int main (int argc, char *argv[]){
 	// palette_names.erase(palette_names.begin() + 1, palette_names.end());
 
 	int num_color_levels = 64;
-	cv::Mat colors(num_color_levels, palette_names.size(), CV_8UC3);
+	cv::Mat colors(palette_names.size(), num_color_levels, CV_8UC3);
 
 	std::cout << "Testing ColorLibrary::PickColor(...)" << std::endl;
 	for(uint32_t pind = 0 ; pind < palette_names.size() ; pind++){
@@ -51,7 +51,7 @@ int main (int argc, char *argv[]){
 
 		for(int32_t i = 0 ; i < num_color_levels ; i++){
 			Color color = ColorLibrary::PickColor((float)i / num_color_levels) * 255;
-			cv::Vec3u &c = colors.at<cv::Vec3u>(i, pind);
+			cv::Vec3u &c = colors.at<cv::Vec3u>(pind, i);
 			c[0] = color(2);
 			c[1] = color(1);
 			c[2] = color(0);
