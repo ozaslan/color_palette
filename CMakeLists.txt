@@ -30,7 +30,7 @@ MESSAGE( STATUS "OpenCV Libraries     : " ${OpenCV_LIBRARIES} )
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES color_palette color_palette
+  LIBRARIES color_palette color_library
   CATKIN_DEPENDS roslib
   DEPENDS EIGEN3 Boost OpenCV 
 )
@@ -50,6 +50,3 @@ target_link_libraries(color_library color_palette ${catkin_LIBRARIES})
 
 add_executable(test_color_library test/test_color_library.cc)
 target_link_libraries(test_color_library color_library ${catkin_LIBRARIES} ${OpenCV_LIBRARIES})
-
-
-
